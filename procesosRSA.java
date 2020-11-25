@@ -5,7 +5,7 @@ public class procesosRSA{
 	
 	//Variables del cifrado RSA Persona 1
 	//Tamaño del primo
-	private int tamanoPrimo = 100;
+	private int tamanoPrimo;
 	//Numeros Primos
 	private BigInteger p_A, q_A, n_A;
 	//Indicador de Euler Phi
