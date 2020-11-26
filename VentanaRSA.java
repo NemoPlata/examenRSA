@@ -42,6 +42,7 @@ public class VentanaRSA extends JFrame{
 	}
 
 	private void panelRSA(){
+        System.out.println("Holi");
         panelRSA = new JPanel();
         panelRSA.setLayout(null);
         panelRSA.setBackground(new Color(98, 198, 199));
