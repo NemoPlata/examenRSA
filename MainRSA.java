@@ -4,12 +4,11 @@ import java.util.Scanner;
 public class MainRSA{
 
 	public static void main(String[]args){
-		Scanner reader = new Scanner(System.in);
-		int tamano = 1024;
+		Scanner reader = new Scanner(System.in);		
 		BigInteger[] msjCifrado;
 		String msjDescifrado;
 
-		procesosRSA prsa = new procesosRSA(tamano);
+		procesosRSA prsa = new procesosRSA();
 		prsa.generarPrimos();
 		prsa.generarClavePublicaPrivadaPhi();
 		System.out.println("Ingrese el mensaje a cifrar por favor:");

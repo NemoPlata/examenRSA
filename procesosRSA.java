@@ -1,11 +1,11 @@
 import java.math.BigInteger;
 import java.util.*;
 
-public class procesosRSA{
+public class ProcesosRSA{
 	
 	//Variables del cifrado RSA Persona 1
 	//Tamaño del primo
-	private int tamanoPrimo;
+	private int tamanoPrimo = 1024;
 	//Numeros Primos
 	private BigInteger p_A, q_A, n_A;
 	//Indicador de Euler Phi
@@ -19,8 +19,7 @@ public class procesosRSA{
 	//Clave publica e
 	private BigInteger e_B;
 
-	public procesosRSA(int tamanoPrimo){
-		this.tamanoPrimo = tamanoPrimo;
+	public ProcesosRSA(){		
 	}
 
 	public void generarPrimos(){
@@ -31,9 +30,9 @@ public class procesosRSA{
 	}
 
 	public void generarClavePublicaPrivadaPhi(){
-		//Obtenemos el numero primo n_A
+		//Obtenemos el numero n_A
 		n_A = p_A.multiply(q_A);
-		//Obtenemos el numero phi
+		//Obtenemos el numero phi = (p-1)*(q-1)
 		phi_A = p_A.subtract(BigInteger.valueOf(1));
 		phi_A = phi_A.multiply(q_A.subtract(BigInteger.valueOf(1)));
 
@@ -42,7 +41,8 @@ public class procesosRSA{
 			e_A = new BigInteger(2*tamanoPrimo, new Random());
 		}while((e_A.compareTo(phi_A) != -1) || (e_A.gcd(phi_A).compareTo(BigInteger.valueOf(1)) != 0));
 		//realizar la operacion modulo d = e^(1mod phi)
-		d_A = e_A.modInverse(phi_A);		
+		d_A = e_A.modInverse(phi_A);
+		guardarClaves(p_A,q_A,phi_A);		
 	}
 
 	public BigInteger[] cifrarRSA_ClavePublica(String mensaje){
@@ -76,11 +76,8 @@ public class procesosRSA{
 		return (new String(charArray));
 	}
 
-	/*public BigInteger[] cifrarRSA_ClavePrivada(String mensaje){
-		 
+	public void guardarClaves(BigInteger p_A, BigInteger q_A, BigInteger phi_A){
+
 	}
 
-	public String descifrar_ClavePublica(BigInteger[] cifrado){
-
-	}*/
 }
