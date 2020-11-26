@@ -12,13 +12,15 @@ public class GuardarClaves implements Serializable{
 	
 	private ArrayList<ClavesRSA> listaClavesRSA = new ArrayList<ClavesRSA>();
 	private ClavesRSA claves = new ClavesRSA();
+	private ArrayList<ClavePrivada> listaClavePrivada = new ArrayList<ClavePrivada>();
+	private ClavePrivada clave_privada = new ClavePrivada();
 
 	public GuardarClaves(){
 
 	}
 
-	public void guardarClaves(BigInteger p, BigInteger q, BigInteger phi) throws IOException, ClassNotFoundException{
-		claves = new ClavesRSA(p , q, phi);
+	public void guardarClaves(BigInteger p, BigInteger q, BigInteger phi, BigInteger[] msj) throws IOException, ClassNotFoundException{
+		claves = new ClavesRSA(p , q, phi, msj);
 		listaClavesRSA.add(claves);
 		FileOutputStream archivoDat = new FileOutputStream("Claves.dat");
 		ObjectOutputStream writer = new ObjectOutputStream(archivoDat);
@@ -30,6 +32,22 @@ public class GuardarClaves implements Serializable{
 		FileInputStream archivoDat = new FileInputStream("Claves.dat");
 		ObjectInputStream reader = new ObjectInputStream(archivoDat);
 		listaClavesRSA = (ArrayList) reader.readObject();
+		reader.close();
+	}
+
+	public void guardarClavePrivada(BigInteger clavePrivada){
+		clave_privada = new ClavesRSA(clavePrivada);
+		listaClavePrivada.add(clave_privada);
+		FileOutputStream archivoDat = new FileOutputStream("ClavePrivada.dat");
+		ObjectOutputStream writer = new ObjectOutputStream(archivoDat);
+		writer.writeObject(listaClavePrivada);
+		writer.close();
+	}
+
+	public void obtenerClavePrivada() throws FileNotFoundException, IOException, ClassNotFoundException{
+		FileInputStream archivoDat = new FileInputStream("ClavePrivada.dat");
+		ObjectInputStream reader = new ObjectInputStream(archivoDat);
+		listaClavePrivada = (ArrayList) reader.readObject();
 		reader.close();
 	}
 
@@ -47,5 +65,21 @@ public class GuardarClaves implements Serializable{
 
 	public void setClaves(ClavesRSA claves){
 		this.claves = claves;
+	}
+
+	public ArrayList<ClavePrivada> getListaClavePrivada(){
+		return listaClavePrivada;
+	}
+
+	public void setListaClavePrivada(ArrayList<ClavePrivada> listaClavePrivada){
+		this.listaClavePrivada = listaClavePrivada;
+	}
+
+	public ClavePrivada getClavePrivada(){
+		return clave_privada;
+	}
+
+	public void setClavePrivada(ClavePrivada clave_privada){
+		this.clave_privada = clave_privada;
 	}
 }

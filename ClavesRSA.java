@@ -6,15 +6,17 @@ public class ClavesRSA implements Serializable{
 	private BigInteger clave_P;
 	private BigInteger clave_Q;
 	private BigInteger clave_Phi;
+	private BigInteger[] msjCifrado;
 
 	public ClavesRSA(){
 
 	}
 	
-	public ClavesRSA(BigInteger p, BigInteger q, BigInteger phi){
+	public ClavesRSA(BigInteger p, BigInteger q, BigInteger phi, BigInteger[] msj){
 		this.clave_P = p;
 		this.clave_Q = q;
 		this.clave_Phi = phi;
+		this.msjCifrado = msj;
 	}
 
 	public BigInteger getClave_P(){
@@ -38,6 +40,14 @@ public class ClavesRSA implements Serializable{
 	}
 
 	public void setClave_Phi(BigInteger clave_Phi){
+		this.clave_Phi = clave_Phi;
+	}
+
+	public BigInteger[] getMsjCifrado(){
+		return msjCifrado;
+	}
+
+	public void setMsjCifrado(BigInteger[] msjCifrado){
 		this.clave_Phi = clave_Phi;
 	}
 }
