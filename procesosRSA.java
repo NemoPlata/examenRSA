@@ -1,8 +1,10 @@
 import java.math.BigInteger;
+import java.io.IOException;
 import java.util.*;
 
 public class ProcesosRSA{
 	
+	private GuardarClaves guardarC = new GuardarClaves();
 	//Variables del cifrado RSA Persona 1
 	//Tamaño del primo
 	private int tamanoPrimo = 1024;
@@ -29,7 +31,7 @@ public class ProcesosRSA{
 		}while(q_A.compareTo(p_A)==0);
 	}
 
-	public void generarClavePublicaPrivadaPhi(){
+	public void generarClavePublicaPrivadaPhi() throws IOException, ClassNotFoundException{
 		//Obtenemos el numero n_A
 		n_A = p_A.multiply(q_A);
 		//Obtenemos el numero phi = (p-1)*(q-1)
@@ -42,7 +44,15 @@ public class ProcesosRSA{
 		}while((e_A.compareTo(phi_A) != -1) || (e_A.gcd(phi_A).compareTo(BigInteger.valueOf(1)) != 0));
 		//realizar la operacion modulo d = e^(1mod phi)
 		d_A = e_A.modInverse(phi_A);
-		guardarClaves(p_A,q_A,phi_A);		
+		System.out.println("Clave P 1:");
+		System.out.println(p_A);
+		System.out.println("");
+		System.out.println("Clave Q 1:");
+		System.out.println(q_A);
+		System.out.println("");
+		System.out.println("Clave Phi 1:");			
+		System.out.println(phi_A);			
+		guardarC.guardarClaves(p_A,q_A,phi_A);		
 	}
 
 	public BigInteger[] cifrarRSA_ClavePublica(String mensaje){
@@ -75,9 +85,4 @@ public class ProcesosRSA{
 
 		return (new String(charArray));
 	}
-
-	public void guardarClaves(BigInteger p_A, BigInteger q_A, BigInteger phi_A){
-
-	}
-
 }
