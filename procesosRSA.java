@@ -67,6 +67,7 @@ public class ProcesosRSA{
 		System.out.println();
 		System.out.println("Mensaje Encriptado:");
 		System.out.println();
+		System.out.println();
 		for(i=0; i<encriptado.length; i++) {
 			System.out.print(encriptado[i]);	
 		}		
