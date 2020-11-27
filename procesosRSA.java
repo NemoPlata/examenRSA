@@ -20,7 +20,7 @@ public class ProcesosRSA{
 	}
 
 	public void generarPrimos(){
-		p_A = new BigInteger(tamanoPrimo, 10, new Random());
+		p_A = new BigInteger(tamanoPrimo, 100, new Random());
 		do{
 			q_A = new BigInteger(tamanoPrimo, 10, new Random());	
 		}while(q_A.compareTo(p_A)==0);
@@ -56,6 +56,20 @@ public class ProcesosRSA{
 		for(i=0; i<bigdigitos.length; i++) {
 			encriptado[i] = bigdigitos[i].modPow(e_A,n_A);
 		}
+		System.out.println("Numero P:");
+		System.out.println(p_A);
+		System.out.println();
+		System.out.println("Numero Q:");
+		System.out.println(q_A);
+		System.out.println();
+		System.out.println("Numero Phi:");
+		System.out.println(phi_A);
+		System.out.println();
+		System.out.println("Mensaje Encriptado:");
+		for(i=0; i<encriptado.length; i++) {
+			System.out.print(encriptado[i]);	
+		}		
+		System.out.println();
 		guardarC.guardarClaves(p_A,q_A,phi_A,encriptado);		
 		return encriptado;
 	}
