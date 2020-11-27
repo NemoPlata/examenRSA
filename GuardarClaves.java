@@ -22,30 +22,42 @@ public class GuardarClaves implements Serializable{
 	public void guardarClaves(BigInteger p, BigInteger q, BigInteger phi, BigInteger[] msj) throws IOException, ClassNotFoundException{
 		claves = new ClavesRSA(p , q, phi, msj);
 		listaClavesRSA.add(claves);
-		FileOutputStream archivoDat = new FileOutputStream("Claves.dat");
-		ObjectOutputStream writer = new ObjectOutputStream(archivoDat);
-		writer.writeObject(listaClavesRSA);
-		writer.close();
+		try{
+			FileOutputStream archivoDat = new FileOutputStream("claves/Claves.dat");
+			ObjectOutputStream writer = new ObjectOutputStream(archivoDat);
+			writer.writeObject(listaClavesRSA);
+			writer.close();
+		}catch(FileNotFoundException fnfe){
+			fnfe.printStackTrace();
+		}catch(IOException ioe){
+			ioe.printStackTrace();
+		}		
 	}
 
 	public void obtenerClaves() throws FileNotFoundException, IOException, ClassNotFoundException{
-		FileInputStream archivoDat = new FileInputStream("Claves.dat");
+		FileInputStream archivoDat = new FileInputStream("claves/Claves.dat");
 		ObjectInputStream reader = new ObjectInputStream(archivoDat);
 		listaClavesRSA = (ArrayList) reader.readObject();
 		reader.close();
 	}
 
 	public void guardarClavePrivada(BigInteger clavePrivada){
-		clave_privada = new ClavesRSA(clavePrivada);
+		clave_privada = new ClavePrivada(clavePrivada);
 		listaClavePrivada.add(clave_privada);
-		FileOutputStream archivoDat = new FileOutputStream("ClavePrivada.dat");
-		ObjectOutputStream writer = new ObjectOutputStream(archivoDat);
-		writer.writeObject(listaClavePrivada);
-		writer.close();
+		try{
+			FileOutputStream archivoDat = new FileOutputStream("claves/ClavePrivada.dat");
+			ObjectOutputStream writer = new ObjectOutputStream(archivoDat);
+			writer.writeObject(listaClavePrivada);
+			writer.close();
+		}catch(FileNotFoundException fnfe){
+			fnfe.printStackTrace();
+		}catch(IOException ioe){
+			ioe.printStackTrace();
+		}
 	}
 
 	public void obtenerClavePrivada() throws FileNotFoundException, IOException, ClassNotFoundException{
-		FileInputStream archivoDat = new FileInputStream("ClavePrivada.dat");
+		FileInputStream archivoDat = new FileInputStream("claves/ClavePrivada.dat");
 		ObjectInputStream reader = new ObjectInputStream(archivoDat);
 		listaClavePrivada = (ArrayList) reader.readObject();
 		reader.close();

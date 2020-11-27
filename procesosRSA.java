@@ -38,7 +38,8 @@ public class ProcesosRSA{
 			e_A = new BigInteger(2*tamanoPrimo, new Random());
 		}while((e_A.compareTo(phi_A) != -1) || (e_A.gcd(phi_A).compareTo(BigInteger.valueOf(1)) != 0));
 		//realizar la operacion modulo d = e^(1mod phi)
-		d_A = e_A.modInverse(phi_A);			
+		d_A = e_A.modInverse(phi_A);
+		guardarC.guardarClavePrivada(d_A);			
 	}
 
 	public BigInteger[] cifrarRSA_ClavePublica(String mensaje) throws IOException, ClassNotFoundException{
@@ -55,8 +56,7 @@ public class ProcesosRSA{
 		for(i=0; i<bigdigitos.length; i++) {
 			encriptado[i] = bigdigitos[i].modPow(e_A,n_A);
 		}
-		guardarC.guardarClaves(p_A,q_A,phi_A,encriptado);
-		guardarC.guardarClavePrivada(d_A);
+		guardarC.guardarClaves(p_A,q_A,phi_A,encriptado);		
 		return encriptado;
 	}
 
