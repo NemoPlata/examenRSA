@@ -22,7 +22,7 @@ public class ProcesosRSA{
 	public void generarPrimos(){
 		p_A = new BigInteger(tamanoPrimo, 100, new Random());
 		do{
-			q_A = new BigInteger(tamanoPrimo, 10, new Random());	
+			q_A = new BigInteger(tamanoPrimo, 100, new Random());	
 		}while(q_A.compareTo(p_A)==0);
 	}
 
